@@ -1,0 +1,26 @@
+{
+  "name": "ast-translator",
+  "version": "0.1.0",
+  "description": "Translate nodes in the abstract syntax tree.",
+  "main": "translator.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/curvedmark/ast-translator.git"
+  },
+  "keywords": [
+    "ast",
+    "visitor",
+    "compiler"
+  ],
+  "author": "Glen Huang <curvedmark@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/curvedmark/ast-translator/issues"
+  }
+}
