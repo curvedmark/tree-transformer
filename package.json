@@ -22,5 +22,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/curvedmark/ast-translator/issues"
+  },
+  "dependencies": {
+    "ast-visitor": "*"
+  },
+  "devDependencies": {
+    "mocha": "1.x"
   }
 }
