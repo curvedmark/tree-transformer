@@ -1,15 +1,14 @@
 'use strict';
 
+var Visitor = require('ast-visitor');
+var inherits = require('util').inherits;
+
 module.exports = Translator;
 
 function Translator(actions) {
-	this._actions = actions;
+	Visitor.apply(this, arguments);
 }
-
-Translator.prototype.visit = function(node) {
-	if (Array.isArray(node)) return this._visitNodes(node);
-	else return this._visitNode(node);
-};
+inherits(Translator, Visitor);
 
 Translator.prototype._visitNodes = function (nodes) {
 	var i = 0;
@@ -21,24 +20,19 @@ Translator.prototype._visitNodes = function (nodes) {
 };
 
 Translator.prototype._visitNode = function(node) {
-	if (node !== Object(node)) return node;
-	if (!node.type) return node;
-	var action = this._actions[node.type] || this._actions.node;
-	if (action) {
-		var ret = action.call(this, node);
-		return ret === undefined ? node : ret;
-	}
+	var ret = Visitor.prototype._visitNode.apply(this, arguments);
+	return ret === undefined ? node : ret;
 };
 
-Translator.prototype._replaceNode = function (node, i, nodes) {
-	if (node === null) {
+Translator.prototype._replaceNode = function (ret, i, nodes) {
+	if (ret === null) {
 		nodes.splice(i, 1);
 		return i;
 	}
-	if (Array.isArray(node)) {
-		nodes.splice.apply(nodes, [i, 1].concat(node));
-		return i + node.length;
+	if (Array.isArray(ret)) {
+		nodes.splice.apply(nodes, [i, 1].concat(ret));
+		return i + ret.length;
 	}
-	if (node !== undefined) nodes[i] = node;
+	if (ret !== undefined) nodes[i] = ret;
 	return i + 1;
 };
