@@ -1,11 +1,11 @@
 var assert = require('assert');
-var Translator = require('../translator');
+var Transformer = require('../Transformer');
 
-describe('Translator', function () {
-	describe('translate a single node', function () {
+describe('Transformer', function () {
+	describe('transform a single node', function () {
 		it('should return returned value', function () {
 			var node = { type: 'number', value: 1 };
-			var result  = new Translator({
+			var result  = new Transformer({
 				number: function (number) {
 					return 1;
 				}
@@ -15,7 +15,7 @@ describe('Translator', function () {
 
 		it('should return null', function () {
 			var node = { type: 'number', value: 1 };
-			var result  = new Translator({
+			var result  = new Transformer({
 				number: function (number) {
 					return null;
 				}
@@ -25,20 +25,20 @@ describe('Translator', function () {
 
 		it('should ignore undefined', function () {
 			var node = { type: 'number', value: 1 };
-			var result = new Translator({
+			var result = new Transformer({
 				node: function () {}
 			}).visit(node);
 			assert.equal(result, node);
 		});
 	});
 
-	describe('translate an array of nodes', function () {
+	describe('transform an array of nodes', function () {
 		it('should replace node', function () {
 			var nodes = [
 				{ type: 'number', value: 1 },
 				{ type: 'string', value: 'abc' }
 			];
-			var result = new Translator({
+			var result = new Transformer({
 				node: function (node) {
 					return node.value;
 				}
@@ -51,7 +51,7 @@ describe('Translator', function () {
 				{ type: 'number', value: 1 },
 				{ type: 'number', value: 3 }
 			];
-			var result = new Translator({
+			var result = new Transformer({
 				number: function (number) {
 					return [number.value, number.value + 1];
 				}
@@ -65,7 +65,7 @@ describe('Translator', function () {
 					{ type: 'number', value: 1 },
 					{ type: 'string', value: 'abc' }
 				];
-				var result = new Translator({
+				var result = new Transformer({
 					number: function () {
 						return null;
 					}
@@ -80,7 +80,7 @@ describe('Translator', function () {
 					{ type: 'number', value: 1 },
 					{ type: 'string', value: 'abc' }
 				];
-				var result = new Translator({
+				var result = new Transformer({
 					number: function () {}
 				}).visit(nodes);
 				assert.deepEqual(result, [
@@ -96,7 +96,7 @@ describe('Translator', function () {
 					{ type: 'number', value: 1 },
 					{ type: 'string', value: 'abc' }
 				];
-				var result = new Translator({}).visit(nodes);
+				var result = new Transformer({}).visit(nodes);
 				assert.deepEqual(result, [
 					{ type: 'number', value: 1 },
 					{ type: 'string', value: 'abc' }

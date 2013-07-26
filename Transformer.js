@@ -1,16 +1,16 @@
 'use strict';
 
-var Visitor = require('ast-visitor');
+var Visitor = require('tree-visitor');
 var inherits = require('util').inherits;
 
-module.exports = Translator;
+module.exports = Transformer;
 
-function Translator(actions) {
+function Transformer(actions) {
 	Visitor.apply(this, arguments);
 }
-inherits(Translator, Visitor);
+inherits(Transformer, Visitor);
 
-Translator.prototype._visitNodes = function (nodes) {
+Transformer.prototype._visitNodes = function (nodes) {
 	var i = 0;
 	while (i < nodes.length) {
 		var ret = this._visitNode(nodes[i]);
@@ -19,12 +19,12 @@ Translator.prototype._visitNodes = function (nodes) {
 	return nodes;
 };
 
-Translator.prototype._visitNode = function(node) {
+Transformer.prototype._visitNode = function (node) {
 	var ret = Visitor.prototype._visitNode.apply(this, arguments);
 	return ret === undefined ? node : ret;
 };
 
-Translator.prototype._replaceNode = function (ret, i, nodes) {
+Transformer.prototype._replaceNode = function (ret, i, nodes) {
 	if (ret === null) {
 		nodes.splice(i, 1);
 		return i;

@@ -1,8 +1,8 @@
 {
-  "name": "ast-translator",
-  "version": "0.2.0",
-  "description": "Translate nodes in the abstract syntax tree.",
-  "main": "translator.js",
+  "name": "tree-transformer",
+  "version": "0.3.0",
+  "description": "Transform nodes in the tree.",
+  "main": "Transformer.js",
   "directories": {
     "test": "test"
   },
@@ -11,20 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/curvedmark/ast-translator.git"
+    "url": "https://github.com/curvedmark/tree-transformer.git"
   },
   "keywords": [
     "ast",
+    "tree",
     "visitor",
+    "transformer",
     "compiler"
   ],
   "author": "Glen Huang <curvedmark@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curvedmark/ast-translator/issues"
+    "url": "https://github.com/curvedmark/tree-transformer/issues"
   },
   "dependencies": {
-    "ast-visitor": "*"
+    "tree-visitor": "*"
   },
   "devDependencies": {
     "mocha": "1.x"
