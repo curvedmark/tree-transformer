@@ -60,48 +60,39 @@ describe('Transformer', function () {
 		});
 
 		it('should remove node for returned null', function () {
-			it('should replace node', function () {
-				var nodes = [
-					{ type: 'number', value: 1 },
-					{ type: 'string', value: 'abc' }
-				];
-				var result = new Transformer({
-					number: function () {
-						return null;
-					}
-				}).visit(nodes);
-				assert.deepEqual(result, [{ type: 'string', value: 'abc' }]);
-			});
+			var nodes = [
+				{ type: 'number', value: 1 },
+				{ type: 'string', value: 'abc' }
+			];
+			var result = new Transformer({
+				number: function () {
+					return null;
+				}
+			}).visit(nodes);
+			assert.deepEqual(result, [{ type: 'string', value: 'abc' }]);
 		});
 
 		it('should ignore node for returned undefined', function () {
-			it('should replace node', function () {
-				var nodes = [
-					{ type: 'number', value: 1 },
-					{ type: 'string', value: 'abc' }
-				];
-				var result = new Transformer({
-					number: function () {}
-				}).visit(nodes);
-				assert.deepEqual(result, [
-					{ type: 'number', value: 1 },
-					{ type: 'string', value: 'abc' }
-				]);
-			});
+			var nodes = [
+				{ type: 'number', value: 1 },
+				{ type: 'string', value: 'abc' }
+			];
+			var result = new Transformer({
+				number: function () {}
+			}).visit(nodes);
+			assert.deepEqual(result, [
+				{ type: 'number', value: 1 },
+				{ type: 'string', value: 'abc' }
+			]);
 		});
 
-		it('should ignore node for having no match action', function () {
-			it('should replace node', function () {
-				var nodes = [
-					{ type: 'number', value: 1 },
-					{ type: 'string', value: 'abc' }
-				];
-				var result = new Transformer({}).visit(nodes);
-				assert.deepEqual(result, [
-					{ type: 'number', value: 1 },
-					{ type: 'string', value: 'abc' }
-				]);
-			});
+		it('should ignore node for having no matching action', function () {
+			var nodes = [
+				{ type: 'number', value: 1 },
+				{ type: 'string', value: 'abc' }
+			];
+			var result = new Transformer({}).visit(nodes);
+			assert.equal(result, nodes);
 		});
 	});
 });
