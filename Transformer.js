@@ -1,5 +1,3 @@
-'use strict';
-
 var Visitor = require('tree-visitor');
 
 module.exports = Transformer;
