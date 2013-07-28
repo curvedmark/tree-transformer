@@ -14,7 +14,7 @@ var nodes = [
 	{ type: 'string', value: 'abc', quote: '"' }
 ];
 var transformer = new Transformer({
-	node: function (node) {
+	node: function (transformer, node) {
 	    return node.value;
 	}
 });
@@ -37,7 +37,7 @@ Some returned values have special meanings:
   		{ type: 'number', value: 3 }
   	];
   	var transformer = new Transformer({
-  		number: function (number) {
+  		number: function (transformer, number) {
   		    return [number.value, number.value + 1];
   		}
   	});
