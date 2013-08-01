@@ -9,6 +9,7 @@ Transformer.prototype = Object.create(Visitor.prototype);
 
 Transformer.replaceNode = function (ret, i, nodes) {
 	if (ret === null) {
+		if (nodes[i] === null) return i + 1
 		nodes.splice(i, 1);
 		return i;
 	}

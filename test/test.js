@@ -72,6 +72,19 @@ describe('Transformer', function () {
 			assert.deepEqual(result, [{ type: 'string', value: 'abc' }]);
 		});
 
+		it('should not remove node if it is null', function () {
+			var node = [
+				null,
+				{ type: 'number', value: 1 }
+			];
+			var result  = new Transformer({
+				number: function () {
+					return null;
+				}
+			}).visit(node);
+			assert.deepEqual(result, [null]);
+		});
+
 		it('should ignore node for returned undefined', function () {
 			var nodes = [
 				{ type: 'number', value: 1 },
