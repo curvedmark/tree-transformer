@@ -6,7 +6,7 @@ describe('Transformer', function () {
 		it('should return returned value', function () {
 			var node = { type: 'number', value: 1 };
 			var result  = new Transformer({
-				number: function (transformer, number) {
+				number: function (number) {
 					return 1;
 				}
 			}).visit(node);
@@ -16,7 +16,7 @@ describe('Transformer', function () {
 		it('should return null', function () {
 			var node = { type: 'number', value: 1 };
 			var result  = new Transformer({
-				number: function (transformer, number) {
+				number: function (number) {
 					return null;
 				}
 			}).visit(node);
@@ -39,7 +39,7 @@ describe('Transformer', function () {
 				{ type: 'string', value: 'abc' }
 			];
 			var result = new Transformer({
-				node: function (transformer, node) {
+				node: function (node) {
 					return node.value;
 				}
 			}).visit(nodes);
@@ -52,7 +52,7 @@ describe('Transformer', function () {
 				{ type: 'number', value: 3 }
 			];
 			var result = new Transformer({
-				number: function (transformer, number) {
+				number: function (number) {
 					return [number.value, number.value + 1];
 				}
 			}).visit(nodes);
