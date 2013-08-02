@@ -1,6 +1,6 @@
 # Tree Transformer
 
-Translate nodes in the tree.
+Transform nodes in the tree.
 
 Like [Tree Visitor](https://github.com/curvedmark/tree-visitor), but actions can return a value to replace the node being processed.
 
@@ -25,7 +25,7 @@ Replacing only happens when visit an array of nodes.
 
 Some returned values have special meanings:
 
-* `null` - remove the node (unless the node itself is 'null', in which case it's ignored)
+* `null` - remove the node (unless the node itself is `null`, in which case it's ignored)
 * `undefined` - do nothing to the node
 * an array of nodes - replace the node with the array of nodes, but the result array is flattened.
 
