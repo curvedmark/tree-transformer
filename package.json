@@ -1,6 +1,6 @@
 {
   "name": "tree-transformer",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Transform nodes in the tree.",
   "main": "Transformer.js",
   "directories": {
