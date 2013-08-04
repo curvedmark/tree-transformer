@@ -2,12 +2,24 @@ var Visitor = require('tree-visitor');
 
 module.exports = Transformer;
 
-function Transformer(actions) {
-	Visitor.apply(this, arguments);
-}
-Transformer.prototype = Object.create(Visitor.prototype);
+function Transformer() {}
+Transformer.prototype = new Visitor();
 
-Transformer.replaceNode = function (ret, i, nodes) {
+Transformer.replaceNode = replaceNode;
+
+Transformer.prototype._visitNodes = function (nodes) {
+	for (var i = 0; i < nodes.length; i = replaceNode(ret, i, nodes)) {
+		var ret = this._visitNode(nodes[i]);
+	}
+	return nodes;
+};
+
+Transformer.prototype._visitNode = function (node) {
+	var ret = Visitor.prototype._visitNode.call(this, node);
+	return ret === undefined ? node : ret;
+};
+
+function replaceNode(ret, i, nodes) {
 	if (ret === null) {
 		if (nodes[i] === null) return i + 1
 		nodes.splice(i, 1);
@@ -20,17 +32,3 @@ Transformer.replaceNode = function (ret, i, nodes) {
 	if (ret !== undefined) nodes[i] = ret;
 	return i + 1;
 }
-
-Transformer.prototype._visitNodes = function (nodes) {
-	var i = 0;
-	while (i < nodes.length) {
-		var ret = this._visitNode(nodes[i]);
-		i = Transformer.replaceNode(ret, i, nodes);
-	}
-	return nodes;
-};
-
-Transformer.prototype._visitNode = function (node) {
-	var ret = Visitor.prototype._visitNode.apply(this, arguments);
-	return ret === undefined ? node : ret;
-};
