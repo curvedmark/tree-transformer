@@ -14,8 +14,9 @@ Transformer.prototype._visitNodes = function (nodes) {
 	return nodes;
 };
 
+var _visitNode = Visitor.prototype._visitNode;
 Transformer.prototype._visitNode = function (node) {
-	var ret = Visitor.prototype._visitNode.call(this, node);
+	var ret = _visitNode.call(this, node);
 	return ret === undefined ? node : ret;
 };
 
