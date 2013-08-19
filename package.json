@@ -2,12 +2,13 @@
   "name": "tree-transformer",
   "version": "0.7.1",
   "description": "Transform nodes in the tree.",
-  "main": "Transformer.js",
+  "main": "lib/Transformer.js",
   "directories": {
+    "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --bail"
   },
   "repository": {
     "type": "git",
